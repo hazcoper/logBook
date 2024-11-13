@@ -152,6 +152,20 @@ class Gqrx:
             print("Error getting radio info: ", E)
             return {}
         
+    def set_radio_frequency(self, frequency):
+        """
+        Given a certain frequency, will set the radio to that frequency
+        """
+        
+        try:
+            self.socket.send(f"F {frequency}\n".encode())
+            data = self.socket.recv(1024)
+            print("Reponse: ", data)
+            return True
+        except Exception as E:
+            print("Error setting frequency: ", E)
+            return False
+        
     def start_iq_recording(self):
         """
         Will start the recording of the IQ data
