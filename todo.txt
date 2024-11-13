@@ -1,0 +1,29 @@
+add gpredict data as well
+    want to know the elev and az that gqrx wanted
+    make sure i know where the antena was pointing and where it was suppoed to be pointing
+    need to check to see if this data is not what rotctl tells me already with primesat
+
+solve gqrx communication
+    can i use it while using gpredict radio corrections?
+    start recording raw file
+    use over the network
+
+cut raw file automatically after recording
+    add the ability to pass in raw file name and metadata name and it cuts
+
+countdown counters should go to negative
+
+long beacon should be a beacon as well
+    register on the timeline normal beacon prediction
+    and reset the normal beacon counter as well
+
+dump metadata if application is closed with unsaved metadata
+
+gqrx and rotctl all inherit from a parent class
+
+add config
+    folders, ip, ports...
+    
+fixed discrepancies with time
+    start time and event time have different formats
+    define better how they are handled in the code
