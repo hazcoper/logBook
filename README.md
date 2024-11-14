@@ -37,7 +37,7 @@ It has a simple ui that allows the user to mark when specific events happen
 - [ ] Better explanantion and why
 - [ ] Add a section on how to use it
 
-- [ ] Countdown counters should go to negative
+- [x] Countdown counters should go to negative
 - [ ] Cut raw file automatically after stop recording
 - [x] Configuration file for the hostnames and ips
 - [ ] Configuration file for the countdowns

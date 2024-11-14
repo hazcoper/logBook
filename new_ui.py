@@ -51,6 +51,7 @@ class Ui:
 
         # GeneralPurpose variables
         self.countdowns = {signal: 0 for signal in self.INTERVALS}
+        self.countdown_state = {signal: False for signal in self.INTERVALS}
         self.is_recording = False
         self.recording_start_time = None
         self.timeline_events = []
@@ -125,11 +126,12 @@ class Ui:
             
     def resetCountdowns(self):
         self.countdowns = {signal: 0 for signal in self.INTERVALS}
+        self.countdown_state = {signal: False for signal in self.INTERVALS}
 
         
     def updateCountdowns(self):
         for signal, label in self.countdown_labels.items():
-            if self.countdowns[signal] > 0:
+            if self.countdown_state[signal] == True:
                 self.countdowns[signal] -= 1
             label.config(text=f"{self.countdowns[signal]}s")
         self.app.after(1000, self.updateCountdowns)
@@ -159,6 +161,7 @@ class Ui:
         global countdowns, timeline_events
         
         self.countdowns[signal_type] = self.INTERVALS[signal_type]
+        self.countdown_state[signal_type] = True
         print("Signal detected:", signal_type)
         
         # add current event to timeline
