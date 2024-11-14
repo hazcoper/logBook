@@ -38,7 +38,9 @@ class Gqrx:
         # for now i am only exposing this function
         # but in the future i should expose other functions as well
         self.server.register_function(self.get_radio_info)
-    
+        self.server.register_function(self.start_iq_recording)
+        self.server.register_function(self.stop_iq_recording)
+        
     def startConnection(self):
         """
         Will start a connection to the gqrx server
