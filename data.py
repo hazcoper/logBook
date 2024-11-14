@@ -40,7 +40,7 @@ class Event:
         if not isinstance(elapsed_str, str):
             raise ValueError(f"Event creation elapsed_str {elapsed_str} must be a string")
         
-        if not isinstance(freq, str):
+        if not isinstance(freq, float):
             raise ValueError(f"Event creation freq {freq} must be a string")
         
         if not isinstance(gain, str):
