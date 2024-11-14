@@ -9,19 +9,25 @@ import xmlrpc.client
 from data import Event, MetaData
 from datetime import datetime
 
+from config_parser import ConfigParser
 
 class Manager:
     
-    def __init__(self, host_list, port_list):
+    def __init__(self):
         """
         It is expecting to receive the list in order for [server, gqrx, rotctl]
         """
+        
+        # load the configuration class
+        self.config = ConfigParser()
+        self.config.loadConfig()
+        
         # Define the server with IP and port
-        self.server = SimpleXMLRPCServer((host_list[0], port_list[0]))
+        self.server = SimpleXMLRPCServer((self.config.get("manager_rpc_host"), self.config.get("manager_rpc_port")))
         self.registerFunctions()
         
-        self.gqrx_proxy  = xmlrpc.client.ServerProxy(f"http://{host_list[1]}:{port_list[1]}")
-        self.rotctl_proxy = xmlrpc.client.ServerProxy(f"http://{host_list[2]}:{port_list[2]}")
+        self.gqrx_proxy  = xmlrpc.client.ServerProxy(f"http://{self.config.get('gqrx_rpc_host')}:{self.config.get('gqrx_rpc_port')}")
+        self.rotctl_proxy = xmlrpc.client.ServerProxy(f"http://{self.config.get('rotctl_rpc_host')}:{self.config.get('rotctl_rpc_port')}")
         
         
         self.meta_data = None     # this will be a object of the MetaData class
@@ -135,19 +141,6 @@ class Manager:
     
 
 if __name__ == "__main__":
-
-    server_ip = "localhost"
-    server_port = 1710
     
-    gqrx_ip_rpc = "localhost"
-    gqrx_port_rpc = 1712
-    
-    rotctl_ip_rpc = "localhost"
-    rotctl_port_rpc = 1713
-    
-    host_list = [server_ip, gqrx_ip_rpc, rotctl_ip_rpc]
-    port_list = [server_port, gqrx_port_rpc, rotctl_port_rpc]
-    
-    
-    manager = Manager(host_list, port_list)
+    manager = Manager()
     manager.server.serve_forever()
