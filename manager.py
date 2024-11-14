@@ -59,8 +59,8 @@ class Manager:
         self.meta_data.start_recording(current_time)
         
         # should call gqrx start recording funciton, but it is still not implemented
-        # [check] - implement gqrx start recording function 
-        
+        self.gqrx_proxy.start_recording()
+                
         return True
     
     def stopRecording(self):
@@ -69,6 +69,7 @@ class Manager:
         Stop the recording of the passage
         """
         
+        self.gqrx_proxy.stop_recording()
         current_time = datetime.now()  # this is the only time that i trust, the manager time
         
         # stop the recording
@@ -114,8 +115,8 @@ class Manager:
         # get the main information
         azimuth = rotctl_dict["azimuth"]
         elevation = rotctl_dict["elevation"]
-        radio_dict["frequency"]
-        radio_dict["gain"]
+        freq = radio_dict["frequency"]
+        gain = radio_dict["gain"]
 
         # remove the values from the dictionaries so we are only left with the extra data
         # del radio_dict["frequency"]
