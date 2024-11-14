@@ -46,10 +46,10 @@ class Event:
         if not isinstance(gain, str):
             raise ValueError(f"Event creation gain {gain} must be a string")
 
-        if not isinstance(azimuth, str):
+        if not isinstance(azimuth, float):
             raise ValueError(f"Event creation azimuth {azimuth} must be a string")
     
-        if not isinstance(elevation, str):
+        if not isinstance(elevation, float):
             raise ValueError(f"Event creation elevation {elevation} must be a string")
         
         # check to see if time is the correct type
