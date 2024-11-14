@@ -201,6 +201,12 @@ class Gqrx:
             print("Error stopping IQ recording: ", E)
             return False
 
+    def main(self):
+        """
+        This is the class that will be used for the code to run itself
+        """
+        self.startConnection()
+        self.server.serve_forever()
 
     
 if __name__ == "__main__":

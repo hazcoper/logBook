@@ -139,6 +139,12 @@ class Manager:
         print("  at time: ", current_time)
         return True
     
+    def main(self):
+        """
+        This is the class that will be used for the code to run itself
+        """
+        self.server.serve_forever()
+    
 
 if __name__ == "__main__":
     

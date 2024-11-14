@@ -129,6 +129,13 @@ class RotCtl:
         print("  rotctl info: ", output_dict)
         
         return output_dict
+    
+    def main(self):
+        """
+        This is the class that will be used for the code to run itself
+        """
+        self.startConnection()
+        self.server.serve_forever()
 
 def main():
     

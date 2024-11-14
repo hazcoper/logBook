@@ -88,6 +88,12 @@ class ConfigParser:
             if value.startswith("[") and value.endswith("]"):
                 value = value[1:-1]  # remove the brackets
                 value = value.split(",")  # split the values
+                
+                # check to see if any of teh values has extra spaces
+                for i in range(len(value)):
+                    value[i] = value[i].strip()
+                    
+                
                 self.logger.debug(f"   Value is a list: {value}")
                 self.logger.debug(f"     result: {value}")
                 return value

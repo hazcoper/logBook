@@ -224,6 +224,12 @@ class Ui:
         self.updateCurrentTimeBar()
         self.app.mainloop()
 
+    def main(self):
+        """
+        This is the class that will be used for the code to run itself
+        """
+        while True:
+            self.loop()
 
 
 
