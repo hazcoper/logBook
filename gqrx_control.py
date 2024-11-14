@@ -3,6 +3,8 @@ from xmlrpc.server import SimpleXMLRPCServer
 import socket
 import time
 
+from config_parser import ConfigParser
+
 """
 The idea of this file is to create a class that will handle the connection and communication with gqrx
 It will allow to easily send commands to send and recevie commands from the gqrx server
@@ -11,17 +13,22 @@ It will allow to easily send commands to send and recevie commands from the gqrx
 
 class Gqrx:
     
-    def __init__(self, host_list, port_list):
+    def __init__(self):
         """
         Receives host list and port list, the order is [gqrx, rpc_server]
         """
-        self.gqrx_ip = host_list[0]
-        self.gqrx_port = port_list[0]
+        
+        # load the configuration class
+        self.config = ConfigParser()
+        self.config.loadConfig()
+        
+        self.gqrx_ip = self.config.get("gqrx_ip")
+        self.gqrx_port = self.config.get("gqrx_port")
         
         self.socket = None
         self.isConnected = True
     
-        self.server = SimpleXMLRPCServer((host_list[1], port_list[1]))
+        self.server = SimpleXMLRPCServer((self.config.get('gqrx_rpc_host'), self.config.get('gqrx_rpc_port')))
         self.registerFunctions()
     
     def registerFunctions(self):
@@ -198,17 +205,7 @@ class Gqrx:
     
 if __name__ == "__main__":
     
-    gqrx_ip = "172.20.38.70"
-    gqrx_ip = "localhost"
-    gqrx_port = 7356
-    
-    rpc_ip = "localhost"
-    rpc_port = 1712
-    
-    host_list = [gqrx_ip, rpc_ip]
-    port_list = [gqrx_port, rpc_port]
-    
-    my_gqrx = Gqrx(host_list, port_list)
+    my_gqrx = Gqrx()
     my_gqrx.startConnection()
     
 
