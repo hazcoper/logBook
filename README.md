@@ -39,13 +39,13 @@ It has a simple ui that allows the user to mark when specific events happen
 
 - [ ] Countdown counters should go to negative
 - [ ] Cut raw file automatically after stop recording
-- [ ] Configuration file for the hostnames and ips
+- [x] Configuration file for the hostnames and ips
 - [ ] Configuration file for the countdowns
 - [ ] Configuration file for the ui 
 - [ ] Dump metadata if application is closed
 - [ ] Add a way to add notes to the metadata
 - [ ] make a super class that gqrx and rotctl inherit from
 - [ ] Long beacong should be a beacon as well
-- [ ] Solve gqrx communication
-- [ ] Make launcher to launch everything at once
-- [ ] Add logging
+- [x] Solve gqrx communication
+- [x] Make launcher to launch everything at once
+- [-] Add logging
