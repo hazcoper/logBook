@@ -47,3 +47,5 @@ It has a simple ui that allows the user to mark when specific events happen
 - [ ] make a super class that gqrx and rotctl inherit from
 - [ ] Long beacong should be a beacon as well
 - [ ] Solve gqrx communication
+- [ ] Make launcher to launch everything at once
+- [ ] Add logging
