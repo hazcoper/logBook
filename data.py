@@ -82,6 +82,7 @@ class Event:
             "time": self.time.isoformat(),
             "elapsed_time": self.elapsed_str,
             "freq": self.freq,
+            "gain": self.gain,
             "azimuth": self.azimuth,
             "elevation": self.elevation,
             "extra_data": self.extra_data

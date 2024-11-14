@@ -119,7 +119,7 @@ class Manager:
         gain = radio_dict["gain"]
 
         # remove the values from the dictionaries so we are only left with the extra data
-        # del radio_dict["frequency"]
+        del radio_dict["frequency"]
         del radio_dict["gain"]
         del rotctl_dict["azimuth"]
         del rotctl_dict["elevation"]
