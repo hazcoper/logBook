@@ -122,6 +122,10 @@ class ConfigParser:
                         self.logger.warning(f"  Invalid format on line {line_number}")
                         continue
                     
+                    # if there is a # in the line, ignore everything after it
+                    if "#" in line:
+                        line = line.split("#")[0]
+                    
                     key, value = line.split(":", 1)  # Split only at the first colon
                     key = key.strip()
                     value = self.parseValue(value.strip())  # try to check the value type
