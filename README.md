@@ -49,3 +49,4 @@ It has a simple ui that allows the user to mark when specific events happen
 - [x] Solve gqrx communication
 - [x] Make launcher to launch everything at once
 - [-] Add logging
+- [ ] make sure it works without any of the modules (does not fail, just does not contain the module information)

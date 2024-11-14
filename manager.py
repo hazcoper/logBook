@@ -101,7 +101,7 @@ class Manager:
         # query gqrx for radio information. i am looking for a sort of snapshot of the radio
         try:
             print("Getting radio dict")
-            # radio_dict = self.gqrx_proxy.get_radio_info()         # this will return a dictionary with all the values that have been taken from the server         
+            radio_dict = self.gqrx_proxy.get_radio_info()         # this will return a dictionary with all the values that have been taken from the server         
             print("getting rotctl dict")
             rotctl_dict = self.rotctl_proxy.get_rotctl_info()     # this will return a dictionary with the azimuth and elevation
         except Exception as e:
@@ -114,12 +114,12 @@ class Manager:
         # get the main information
         azimuth = rotctl_dict["azimuth"]
         elevation = rotctl_dict["elevation"]
-        freq = 0 #radio_dict["frequency"]
-        gain = 0 #radio_dict["gain"]
-        
+        radio_dict["frequency"]
+        radio_dict["gain"]
+
         # remove the values from the dictionaries so we are only left with the extra data
         # del radio_dict["frequency"]
-        # del radio_dict["gain"]
+        del radio_dict["gain"]
         del rotctl_dict["azimuth"]
         del rotctl_dict["elevation"]
         
