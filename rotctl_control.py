@@ -20,7 +20,7 @@ class RotCtl:
         - getAzimuthElevation    
     """
     
-    def __init__(self, host_list, port_list):
+    def __init__(self):
         """
         Receives host list and port list, the order is [rotctl, rpc_server]
         """
@@ -132,20 +132,8 @@ class RotCtl:
 
 def main():
     
-    import time
     
-    # Connect to the rigctld rotator control server
-    rotctl_ip = "172.20.38.211"
-    # rotctl_ip = "localhost"
-    rotctl_port = 4533
-
-    rpc_server_ip = "localhost"
-    rpc_server_port = 1713 
-    
-    host_list = [rotctl_ip, rpc_server_ip]
-    port_list = [rotctl_port, rpc_server_port]
-    
-    my_rot = RotCtl(host_list, port_list)
+    my_rot = RotCtl()
     my_rot.startConnection()
     
     my_rot.server.serve_forever()
