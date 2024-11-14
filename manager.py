@@ -59,7 +59,7 @@ class Manager:
         self.meta_data.start_recording(current_time)
         
         # should call gqrx start recording funciton, but it is still not implemented
-        self.gqrx_proxy.start_recording()
+        self.gqrx_proxy.start_iq_recording()
                 
         return True
     
@@ -69,7 +69,7 @@ class Manager:
         Stop the recording of the passage
         """
         
-        self.gqrx_proxy.stop_recording()
+        self.gqrx_proxy.stop_iq_recording()
         current_time = datetime.now()  # this is the only time that i trust, the manager time
         
         # stop the recording
