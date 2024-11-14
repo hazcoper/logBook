@@ -1,6 +1,8 @@
 from xmlrpc.server import SimpleXMLRPCServer
 import socket
 
+from config_parser import ConfigParser
+
 """
 The idea of this file is to create a class that will handle the connection and communication with rotctld
 It will allow to easily send commands to the controller and receive back information from the controller
@@ -22,13 +24,18 @@ class RotCtl:
         """
         Receives host list and port list, the order is [rotctl, rpc_server]
         """
-        self.rotctl_ip = host_list[0]
-        self.rotctl_port = port_list[0]
+
+        # load the config file
+        self.config = ConfigParser()
+        self.config.loadConfig()
+
+        self.rotctl_ip = self.config.get("rotctl_ip")
+        self.rotctl_port = self.config.get("rotctl_port")
         
         self.socket = None
         self.isConnected = True
     
-        self.server = SimpleXMLRPCServer((host_list[1], port_list[1]))
+        self.server = SimpleXMLRPCServer((self.config.get("rotctl_rpc_host"), self.config.get("rotctl_rpc_port")))
         self.registerFunctions()
         
     def registerFunctions(self):
