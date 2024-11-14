@@ -149,6 +149,7 @@ class MetaData:
             file_path = os.path.join(file_folder, file_name)
             
             # Convert datetime objects to ISO format strings for JSON serialization
+            event_dict = {}
             for event in self.event_list:
                 event_dict = event.to_dict()  # Convert event to dictionary
                 event.time = event_dict["time"]  # Ensure time is serialized as a string
