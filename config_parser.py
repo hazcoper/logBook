@@ -29,6 +29,7 @@ class ConfigParser:
     def loadDefaultValues(self):
         """
         Hardcoded default values that will be used in case a certain key is not found in the configuration file.
+        just add a variable with a certain value and it will automatically add that variable to the dictionary
         """
         gqrx_ip = "localhost"
         gqrx_port = 7356
@@ -42,6 +43,9 @@ class ConfigParser:
         
         manager_rpc_host = "localhost"
         manager_rpc_port = 1710
+        
+        modules = ["gqrx_control", "rotctl_control", "manager", "new_ui"]
+        
     
         # load all the variables defined in this functions to the dict
         variable_dict = locals()
@@ -65,21 +69,35 @@ class ConfigParser:
 
         # check if it is a number
         try:
+            value = int(value)
             self.logger.debug(f"   Value is a number: {value}")
-            return int(value)
+            return value
         except ValueError:
             pass
         
         # check if it is a float
         try:
+            value = float(value)
             self.logger.debug(f"   Value is a float: {value}")
-            return float(value)
+            return value
         except ValueError:
             pass
         
+        # check if its a list
+        try:
+            if value.startswith("[") and value.endswith("]"):
+                value = value[1:-1]  # remove the brackets
+                value = value.split(",")  # split the values
+                self.logger.debug(f"   Value is a list: {value}")
+                self.logger.debug(f"     result: {value}")
+                return value
+        except Exception as e:
+            self.logger.error(f"Error parsing value: {e}")
+              
         # if it is none of the above, return the string
         self.logger.debug(f"   Value is a string: {value}")
         return value
+      
 
     def loadConfig(self):
         """
@@ -131,6 +149,6 @@ class ConfigParser:
     
 if __name__ == "__main__":
     my_conf = ConfigParser()
-    # my_conf.set_logging_level(logging.DEBUG)  # Change logging level here if needed
+    my_conf.set_logging_level(logging.DEBUG)  # Change logging level here if needed
     my_conf.loadConfig()
     print("Config dict:", my_conf.config_dict)
