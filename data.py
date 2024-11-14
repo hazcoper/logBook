@@ -11,7 +11,7 @@ class Event:
     But it should have a method to convert the object into a dictionary for JSON serialization
     """
     
-    def __init__(self, name, time, elapsed_str, freq, gain, azimuth, elevation, extra_data=None):
+    def __init__(self, name, time, elapsed_str, freq, gain, azimuth, elevation, extra_data={}):
         """
         name : str
             The name of the event
@@ -35,7 +35,7 @@ class Event:
             raise ValueError(f"Event creation name {name} must be a string")
 
         if not isinstance(time, datetime):
-            raise ValueError("Event creation time {time} must be a datetime object")
+            raise ValueError(f"Event creation time {time} must be a datetime object")
         
         if not isinstance(elapsed_str, str):
             raise ValueError(f"Event creation elapsed_str {elapsed_str} must be a string")
@@ -52,6 +52,14 @@ class Event:
         if not isinstance(elevation, float):
             raise ValueError(f"Event creation elevation {elevation} must be a string")
         
+        if not isinstance(extra_data, dict):
+            raise ValueError(f"Event creation extra_data {extra_data} must be a dictionary")
+        
+        # check that all the data in the extra data is a string, int or float
+        for key in extra_data:
+            if not isinstance(extra_data[key], str) and not isinstance(extra_data[key], int) and not isinstance(extra_data[key], float):
+                raise ValueError(f"Extra data {extra_data[key]} must be a string, int or float")
+                
         # check to see if time is the correct type
         self.name = name
         self.time = time
@@ -75,7 +83,8 @@ class Event:
             "elapsed_time": self.elapsed_str,
             "freq": self.freq,
             "azimuth": self.azimuth,
-            "elevation": self.elevation
+            "elevation": self.elevation,
+            "extra_data": self.extra_data
         }
 
 class MetaData:
@@ -148,13 +157,6 @@ class MetaData:
                     
             file_path = os.path.join(file_folder, file_name)
             
-            # Convert datetime objects to ISO format strings for JSON serialization
-            event_dict = {}
-            for event in self.event_list:
-                event_dict = event.to_dict()  # Convert event to dictionary
-                event.time = event_dict["time"]  # Ensure time is serialized as a string
-            
-            print(event_dict)
             # Prepare the metadata dictionary to be serialized
             metadata_dict = {
                 "comment": self.comment,
@@ -162,6 +164,8 @@ class MetaData:
                 "end_record_time": self.end_record_time.isoformat(),
                 "event_list": [event.to_dict() for event in self.event_list]  # Convert each event to dict
             }
+            
+            print(metadata_dict)
             
             # Dump the data
             with open(file_path, "w") as file:

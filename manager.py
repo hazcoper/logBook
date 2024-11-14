@@ -131,7 +131,7 @@ class Manager:
         seconds = total_seconds % 60
         elapsed_time_str = f"{minutes:02}:{seconds:02}"
         
-        my_event = Event(event, current_time, elapsed_time_str, freq, gain, azimuth, elevation, {**rotctl_dict})
+        my_event = Event(event, current_time, elapsed_time_str, freq, gain, azimuth, elevation, {**rotctl_dict, **radio_dict})
 
         # register the event
         self.meta_data.register_event(my_event)
