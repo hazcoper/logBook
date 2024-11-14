@@ -7,13 +7,18 @@ import xmlrpc.client
 
 
 from data import MetaData, Event
+from config_parser import ConfigParser
 
 
 class Ui:
-    def __init__(self, host="localhost", port=1710):
+    def __init__(self):
+        
+        # load the configuration class
+        self.config = ConfigParser()
+        self.config.loadConfig()
         
         # rpc proxy to send the events
-        self.proxy = xmlrpc.client.ServerProxy(f"http://{host}:{port}/")
+        self.proxy = xmlrpc.client.ServerProxy(f"http://{self.config.get('manager_rpc_host')}:{self.config.get('manager_rpc_port')}/")
 
 
         # these are all configs that should be loaded from a config file
